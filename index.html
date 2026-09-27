@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#111111" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Plaka Tarama" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <title>Plaka Tarama</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Plaka Tarama</h1>
+      <p id="status">Hazır</p>
+    </div>
+    <button id="startBtn" class="primary">Kamerayı Aç</button>
+  </header>
+
+  <main>
+    <section class="camera-card">
+      <div class="camera-wrap">
+        <video id="video" playsinline autoplay muted></video>
+        <div class="roi" aria-hidden="true">
+          <span>PLAKA OKUMA ALANI</span>
+        </div>
+        <canvas id="overlay"></canvas>
+      </div>
+      <div class="controls">
+        <label class="switch-row">
+          <span>Otomatik tarama</span>
+          <input id="autoScan" type="checkbox" checked />
+        </label>
+        <label>
+          Tarama aralığı
+          <select id="intervalSelect">
+            <option value="1200">1,2 sn</option>
+            <option value="1800" selected>1,8 sn</option>
+            <option value="2500">2,5 sn</option>
+            <option value="3500">3,5 sn</option>
+          </select>
+        </label>
+        <button id="scanBtn">Şimdi Tara</button>
+      </div>
+    </section>
+
+    <section class="last-card">
+      <div class="label">Son Plaka</div>
+      <div id="lastPlate" class="plate">—</div>
+      <div id="lastMeta" class="meta">Henüz kayıt yok</div>
+    </section>
+
+    <section class="gps-card">
+      <div><strong>GPS:</strong> <span id="gpsText">Konum bekleniyor…</span></div>
+      <div><strong>Kayıt:</strong> <span id="countText">0</span></div>
+    </section>
+
+    <section class="actions">
+      <button id="exportBtn">CSV Dışa Aktar</button>
+      <button id="clearBtn" class="danger">Kayıtları Sil</button>
+    </section>
+
+    <section>
+      <h2>Son Tespitler</h2>
+      <div id="records" class="records"></div>
+    </section>
+  </main>
+
+  <canvas id="capture" hidden></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
